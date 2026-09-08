@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "DevCamp - Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "BASE_URL", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "GET All Users",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{BASE_URL}}/api/users", "host": ["{{BASE_URL}}"], "path": ["api", "users"] }
+      }
+    },
+    {
+      "name": "GET User by Id (postojeci)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{BASE_URL}}/api/users/1", "host": ["{{BASE_URL}}"], "path": ["api", "users", "1"] }
+      }
+    },
+    {
+      "name": "GET User by Id (nepostojeci -> 404)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{BASE_URL}}/api/users/999", "host": ["{{BASE_URL}}"], "path": ["api", "users", "999"] }
+      }
+    },
+    {
+      "name": "GET User by Id (slovo -> bonus)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{BASE_URL}}/api/users/abc", "host": ["{{BASE_URL}}"], "path": ["api", "users", "abc"] }
+      }
+    },
+    {
+      "name": "POST Create User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Novi Korisnik\",\n  \"email\": \"novi@mail.com\",\n  \"age\": 22\n}"
+        },
+        "url": { "raw": "{{BASE_URL}}/api/users", "host": ["{{BASE_URL}}"], "path": ["api", "users"] }
+      }
+    },
+    {
+      "name": "PUT Update User",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Ana M.\",\n  \"email\": \"ana@mail.com\"\n}"
+        },
+        "url": { "raw": "{{BASE_URL}}/api/users/1", "host": ["{{BASE_URL}}"], "path": ["api", "users", "1"] }
+      }
+    },
+    {
+      "name": "DELETE User (-> 204)",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{BASE_URL}}/api/users/3", "host": ["{{BASE_URL}}"], "path": ["api", "users", "3"] }
+      }
+    }
+  ]
+}
