@@ -12,6 +12,11 @@ app.get("/api/users/:id", async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: Number(id) },
   });
+
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
   res.json(user);
 });
 
@@ -32,4 +37,6 @@ app.delete("/api/users/:id", async (req, res) => {
 - 204 nema body: `res.status(204).json({...})` je besmislen
 - Bez provjere `Number.isNaN`, `/api/users/abc` daje 404 umjesto 400 —
   krivo je klijentov zahtjev, ne "nema resursa"
+- `findUnique` vraća `null`, ne baca grešku — bez `if (!user)` klijent dobije
+  `200 null` umjesto 404
 - `catch (err)` hvata sve — u produkciji se provjerava Prisma error kod `P2025`
